@@ -1,0 +1,113 @@
+{
+  "mapName": "Vertical Bazaar",
+  "description": "Layered market district with stacked shops, bridges, lookout tower, and roof routes.",
+  "style": "medieval",
+  "scale": 1,
+  "rootPath": "Workspace/MapDrafts",
+  "theme": {
+    "mood": "warm dense hillside market",
+    "genre": "adventure hub",
+    "palette": {
+      "wall": { "type": "Color3", "value": [0.42, 0.35, 0.27] },
+      "accent": { "type": "Color3", "value": [0.67, 0.38, 0.18] },
+      "roof": { "type": "Color3", "value": [0.24, 0.12, 0.09] },
+      "floor": { "type": "Color3", "value": [0.48, 0.45, 0.38] },
+      "trim": { "type": "Color3", "value": [0.86, 0.72, 0.46] }
+    },
+    "materials": ["Concrete", "WoodPlanks", "Metal", "Glass"]
+  },
+  "lighting": {
+    "timeOfDay": "17:40:00",
+    "ambient": { "type": "Color3", "value": [0.42, 0.36, 0.31] },
+    "brightness": 2.4
+  },
+  "layout": {
+    "kind": "hub",
+    "origin": [0, 72, 0],
+    "size": [220, 120, 180],
+    "primaryAxis": "z",
+    "notes": "Vertical social hub with roof traversal."
+  },
+  "buildings": [
+    {
+      "name": "LowerMarketHall",
+      "kind": "market",
+      "position": [0, 76, 0],
+      "size": [58, 20, 44],
+      "levels": 2,
+      "floorHeight": 11,
+      "balconyEvery": 2,
+      "roof": "pitched"
+    },
+    {
+      "name": "StackedTeaHouse",
+      "kind": "commercial",
+      "position": [62, 86, 26],
+      "size": [38, 18, 34],
+      "levels": 4,
+      "floorHeight": 10,
+      "balconyEvery": 2,
+      "roof": "flat"
+    },
+    {
+      "name": "CourierTower",
+      "kind": "tower",
+      "position": [-56, 88, 42],
+      "size": [28, 18, 28],
+      "levels": 5,
+      "floorHeight": 9,
+      "roof": "antenna"
+    }
+  ],
+  "pois": [
+    {
+      "name": "ArrivalPlaza",
+      "kind": "spawn",
+      "position": [-38, 78, -44],
+      "size": [28, 1, 22],
+      "priority": "critical"
+    },
+    {
+      "name": "RoofVista",
+      "kind": "vista",
+      "position": [62, 130, 26],
+      "size": [10, 14, 10],
+      "priority": "high",
+      "color": { "type": "Color3", "value": [1, 0.75, 0.25] },
+      "transparency": 0.2
+    },
+    {
+      "name": "VendorRow",
+      "kind": "market",
+      "position": [0, 79, -28],
+      "size": [48, 6, 12],
+      "priority": "medium"
+    }
+  ],
+  "connectors": [
+    {
+      "name": "ArrivalWalk",
+      "kind": "path",
+      "from": "ArrivalPlaza",
+      "to": "LowerMarketHall",
+      "width": 14
+    },
+    {
+      "name": "TeaHouseBridge",
+      "kind": "bridge",
+      "from": "LowerMarketHall",
+      "to": "StackedTeaHouse",
+      "width": 10
+    },
+    {
+      "name": "CourierSkywalk",
+      "kind": "bridge",
+      "from": "CourierTower",
+      "to": "RoofVista",
+      "width": 8
+    }
+  ],
+  "zones": [],
+  "instances": [],
+  "scripts": []
+}

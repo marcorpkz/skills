@@ -1,0 +1,63 @@
+{
+  "mapName": "Forest Arena",
+  "description": "Circular forest arena with terrain and simple cover props.",
+  "style": "lowpoly",
+  "scale": 1,
+  "rootPath": "Workspace/MapDrafts",
+  "lighting": {
+    "timeOfDay": "16:30:00",
+    "ambient": { "type": "Color3", "value": [0.35, 0.42, 0.32] },
+    "brightness": 2.5
+  },
+  "terrain": {
+    "enabled": true,
+    "biome": "forest",
+    "size": [256, 48, 256],
+    "seed": 20260707,
+    "heightNoise": 0.35,
+    "water": false,
+    "caves": false,
+    "paths": true
+  },
+  "zones": [
+    {
+      "name": "NorthSpawn",
+      "kind": "spawn",
+      "position": { "type": "Vector3", "value": [0, 8, -88] },
+      "size": { "type": "Vector3", "value": [24, 2, 24] }
+    },
+    {
+      "name": "CenterCombat",
+      "kind": "combat",
+      "position": { "type": "Vector3", "value": [0, 6, 0] },
+      "size": { "type": "Vector3", "value": [80, 6, 80] }
+    }
+  ],
+  "instances": [
+    {
+      "className": "Part",
+      "name": "CenterRing",
+      "parentPath": "$MAP_ROOT",
+      "properties": {
+        "Anchored": true,
+        "Size": { "type": "Vector3", "value": [90, 2, 90] },
+        "Position": { "type": "Vector3", "value": [0, 2, 0] },
+        "Material": { "type": "Enum", "value": "Enum.Material.Grass" },
+        "Color": { "type": "Color3", "value": [0.18, 0.45, 0.2] }
+      }
+    },
+    {
+      "className": "Part",
+      "name": "StoneCoverA",
+      "parentPath": "$MAP_ROOT",
+      "properties": {
+        "Anchored": true,
+        "Size": { "type": "Vector3", "value": [10, 8, 24] },
+        "Position": { "type": "Vector3", "value": [-28, 6, -8] },
+        "Material": { "type": "Enum", "value": "Enum.Material.Slate" },
+        "Color": { "type": "Color3", "value": [0.34, 0.35, 0.35] }
+      }
+    }
+  ],
+  "scripts": []
+}

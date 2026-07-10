@@ -1,0 +1,10 @@
+{
+  "name": "RobloxStudioBridge",
+  "tree": {
+    "$className": "Script",
+    "$path": "src/init.lua",
+    "Bridge": {
+      "$path": "src/Bridge"
+    }
+  }
+}

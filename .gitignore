@@ -1,0 +1,15 @@
+/node_modules/
+/dist/
+/logs/
+/generated/
+packages/*/dist/
+*.rbxm
+*.rbxmx
+plugin/*.plugin.lua
+.env
+.env.*
+!.env.example
+screenshot-contact.jpg
+v1-v4-contact.jpg
+v4-contact.jpg
+late-v4-contact.jpg

@@ -1,0 +1,37 @@
+{
+  "name": "roblox-studio",
+  "version": "0.1.0",
+  "description": "Inspect, build, repair, validate, and playtest Roblox Studio maps and Luau through a local MCP bridge.",
+  "author": {
+    "name": "ShiroKSH",
+    "url": "https://github.com/ShiroKSH"
+  },
+  "homepage": "https://github.com/ShiroKSH/skills#readme",
+  "repository": "https://github.com/ShiroKSH/skills",
+  "license": "MIT",
+  "keywords": ["roblox", "roblox-studio", "agent-skills", "mcp", "luau", "maps"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Roblox Studio",
+    "shortDescription": "Build and repair Roblox maps with an agent.",
+    "longDescription": "A focused skill and local bridge for inspecting the open Roblox place, applying SceneSpec map builds, editing generated instances, creating terrain and Luau, validating geometry, checking playability, and mirroring code to Rojo.",
+    "developerName": "ShiroKSH",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "https://github.com/ShiroKSH/skills",
+    "defaultPrompt": [
+      "Build a playable Roblox obby in Studio.",
+      "Create a cabin with working doors and a balcony.",
+      "Inspect this generated map and repair its geometry."
+    ],
+    "brandColor": "#00A2FF",
+    "screenshots": [
+      "./assets/evolution/v1-night-pass.png",
+      "./assets/evolution/v4-exterior-pass.png",
+      "./assets/evolution/v4-window-detail.png",
+      "./assets/evolution/latest-playtest.png",
+      "./assets/evolution/latest-station-detail.png"
+    ]
+  }
+}

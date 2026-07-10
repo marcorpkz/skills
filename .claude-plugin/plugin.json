@@ -1,0 +1,14 @@
+{
+  "name": "roblox-studio",
+  "description": "Inspect, build, repair, validate, and playtest Roblox Studio maps and Luau through a local MCP bridge.",
+  "author": {
+    "name": "ShiroKSH",
+    "url": "https://github.com/ShiroKSH"
+  },
+  "homepage": "https://github.com/ShiroKSH/skills#readme",
+  "repository": "https://github.com/ShiroKSH/skills",
+  "license": "MIT",
+  "keywords": ["roblox", "roblox-studio", "agent-skills", "mcp", "luau", "maps"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

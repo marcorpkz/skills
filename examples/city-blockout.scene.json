@@ -1,0 +1,66 @@
+{
+  "mapName": "City Blockout",
+  "description": "Greybox city block for early layout testing.",
+  "style": "modern",
+  "scale": 1,
+  "rootPath": "Workspace/MapDrafts",
+  "terrain": {
+    "enabled": false,
+    "biome": "city",
+    "size": [256, 32, 256],
+    "seed": 303
+  },
+  "zones": [
+    {
+      "name": "MainRoad",
+      "kind": "road",
+      "position": { "type": "Vector3", "value": [0, 1, 0] },
+      "size": { "type": "Vector3", "value": [180, 1, 28] }
+    },
+    {
+      "name": "SpawnPlaza",
+      "kind": "spawn",
+      "position": { "type": "Vector3", "value": [-64, 3, 0] },
+      "size": { "type": "Vector3", "value": [32, 2, 32] }
+    }
+  ],
+  "instances": [
+    {
+      "className": "Part",
+      "name": "RoadSurface",
+      "parentPath": "$MAP_ROOT",
+      "properties": {
+        "Anchored": true,
+        "Size": { "type": "Vector3", "value": [190, 1, 30] },
+        "Position": { "type": "Vector3", "value": [0, 0, 0] },
+        "Material": { "type": "Enum", "value": "Enum.Material.Asphalt" },
+        "Color": { "type": "Color3", "value": [0.08, 0.08, 0.09] }
+      }
+    },
+    {
+      "className": "Part",
+      "name": "BlockoutBuildingA",
+      "parentPath": "$MAP_ROOT",
+      "properties": {
+        "Anchored": true,
+        "Size": { "type": "Vector3", "value": [36, 48, 36] },
+        "Position": { "type": "Vector3", "value": [38, 24, 42] },
+        "Material": { "type": "Enum", "value": "Enum.Material.Concrete" },
+        "Color": { "type": "Color3", "value": [0.42, 0.44, 0.46] }
+      }
+    },
+    {
+      "className": "Part",
+      "name": "BlockoutBuildingB",
+      "parentPath": "$MAP_ROOT",
+      "properties": {
+        "Anchored": true,
+        "Size": { "type": "Vector3", "value": [28, 34, 52] },
+        "Position": { "type": "Vector3", "value": [-10, 17, -48] },
+        "Material": { "type": "Enum", "value": "Enum.Material.Concrete" },
+        "Color": { "type": "Color3", "value": [0.32, 0.34, 0.36] }
+      }
+    }
+  ],
+  "scripts": []
+}

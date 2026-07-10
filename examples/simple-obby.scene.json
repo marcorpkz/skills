@@ -1,0 +1,88 @@
+{
+  "mapName": "Simple Obby",
+  "description": "Small starter obby with spawn, platforms, and a finish marker.",
+  "style": "obby",
+  "scale": 1,
+  "rootPath": "Workspace/MapDrafts",
+  "lighting": {
+    "timeOfDay": "14:00:00",
+    "ambient": { "type": "Color3", "value": [0.55, 0.58, 0.65] },
+    "brightness": 2
+  },
+  "terrain": {
+    "enabled": false,
+    "biome": "arena",
+    "size": [128, 32, 128],
+    "seed": 101
+  },
+  "zones": [
+    {
+      "name": "SpawnArea",
+      "kind": "spawn",
+      "position": { "type": "Vector3", "value": [0, 4, 0] },
+      "size": { "type": "Vector3", "value": [16, 1, 16] },
+      "notes": "Safe start pad."
+    },
+    {
+      "name": "Finish",
+      "kind": "decoration",
+      "position": { "type": "Vector3", "value": [0, 8, 96] },
+      "size": { "type": "Vector3", "value": [20, 2, 12] },
+      "notes": "End platform."
+    }
+  ],
+  "instances": [
+    {
+      "className": "Part",
+      "name": "StartPlatform",
+      "parentPath": "$MAP_ROOT",
+      "properties": {
+        "Anchored": true,
+        "Size": { "type": "Vector3", "value": [32, 2, 32] },
+        "Position": { "type": "Vector3", "value": [0, 0, 0] },
+        "Material": { "type": "Enum", "value": "Enum.Material.Concrete" },
+        "Color": { "type": "Color3", "value": [0.35, 0.35, 0.35] }
+      }
+    },
+    {
+      "className": "Part",
+      "name": "JumpPad01",
+      "parentPath": "$MAP_ROOT",
+      "properties": {
+        "Anchored": true,
+        "Size": { "type": "Vector3", "value": [14, 2, 14] },
+        "Position": { "type": "Vector3", "value": [0, 6, 32] },
+        "Material": { "type": "Enum", "value": "Enum.Material.SmoothPlastic" },
+        "Color": { "type": "Color3", "value": [0.1, 0.55, 0.9] }
+      }
+    },
+    {
+      "className": "Part",
+      "name": "JumpPad02",
+      "parentPath": "$MAP_ROOT",
+      "properties": {
+        "Anchored": true,
+        "Size": { "type": "Vector3", "value": [14, 2, 14] },
+        "Position": { "type": "Vector3", "value": [18, 10, 64] },
+        "Material": { "type": "Enum", "value": "Enum.Material.SmoothPlastic" },
+        "Color": { "type": "Color3", "value": [0.9, 0.68, 0.12] }
+      }
+    },
+    {
+      "className": "PointLight",
+      "name": "FinishGlow",
+      "parentPath": "$MAP_ROOT",
+      "properties": {
+        "Brightness": 2,
+        "Range": 28,
+        "Color": { "type": "Color3", "value": [0.4, 0.95, 0.7] }
+      }
+    }
+  ],
+  "scripts": [
+    {
+      "path": "ServerScriptService/MapRuntime.server.lua",
+      "source": "print(\"Simple Obby runtime loaded\")"
+    }
+  ]
+}

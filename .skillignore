@@ -1,0 +1,11 @@
+node_modules/
+dist/
+logs/
+generated/
+.git/
+.env
+.env.*
+*.rbxm
+*.rbxmx
+screenshot-contact.jpg
+v1-v4-contact.jpg

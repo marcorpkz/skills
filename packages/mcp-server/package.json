@@ -1,0 +1,10 @@
+{
+  "name": "@shiroksh/roblox-studio-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "roblox-studio-mcp": "dist/index.js"
+  }
+}

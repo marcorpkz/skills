@@ -1,0 +1,55 @@
+{
+  "name": "roblox-studio-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Roblox Studio skill and local MCP bridge for building maps and Luau with coding agents.",
+  "license": "MIT",
+  "author": "ShiroKSH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShiroKSH/skills.git"
+  },
+  "keywords": [
+    "roblox",
+    "roblox-studio",
+    "agent-skills",
+    "mcp",
+    "luau",
+    "maps"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "roblox-studio-mcp": "packages/mcp-server/dist/index.js"
+  },
+  "files": [
+    "packages/mcp-server/dist/"
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "dev": "tsx packages/mcp-server/src/index.ts",
+    "test": "vitest run",
+    "check": "npm run build && npm test",
+    "build:plugin": "node -e \"require('fs').mkdirSync('dist',{recursive:true})\" && rojo build plugin/plugin.project.json -o dist/RobloxStudioBridge.rbxm",
+    "install:plugin": "npm run build:plugin && node scripts/install-studio-plugin.mjs",
+    "validate:skill": "node scripts/validate-skill-frontmatter.mjs skills/roblox-studio/SKILL.md",
+    "format:luau": "stylua plugin/src"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.5",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8",
+    "yaml": "^2.9.0"
+  }
+}

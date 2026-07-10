@@ -1,0 +1,546 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:roblox-studio:scene-spec",
+  "title": "Roblox Studio SceneSpec",
+  "type": "object",
+  "required": ["mapName", "style"],
+  "additionalProperties": false,
+  "properties": {
+    "mapName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[A-Za-z0-9 _-]+$"
+    },
+    "description": {
+      "type": "string"
+    },
+    "style": {
+      "type": "string",
+      "enum": ["realistic", "lowpoly", "cartoon", "sci-fi", "medieval", "modern", "horror", "obby"]
+    },
+    "scale": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 100,
+      "default": 1
+    },
+    "rootPath": {
+      "type": "string",
+      "default": "Workspace/MapDrafts"
+    },
+    "allowExistingEdit": {
+      "type": "boolean",
+      "default": false
+    },
+    "lighting": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "timeOfDay": { "type": "string" },
+        "ambient": { "$ref": "#/$defs/serializedValue" },
+        "brightness": { "type": "number", "minimum": 0, "maximum": 20 }
+      }
+    },
+    "terrain": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean", "default": false },
+        "biome": {
+          "type": "string",
+          "enum": ["forest", "desert", "snow", "island", "city", "arena", "custom"],
+          "default": "custom"
+        },
+        "size": {
+          "$ref": "#/$defs/vector3Array",
+          "default": [256, 64, 256]
+        },
+        "seed": { "type": "integer" },
+        "heightNoise": { "type": "number", "minimum": 0, "maximum": 1 },
+        "water": { "type": "boolean" },
+        "caves": { "type": "boolean" },
+        "paths": { "type": "boolean" }
+      }
+    },
+    "zones": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/zone" },
+      "default": []
+    },
+    "layout": {
+      "$ref": "#/$defs/layout"
+    },
+    "buildings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/building" }
+    },
+    "levels": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/level" }
+    },
+    "pois": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/poi" }
+    },
+    "connectors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/connector" }
+    },
+    "functionalObjects": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/functionalObject" },
+      "default": []
+    },
+    "theme": {
+      "$ref": "#/$defs/theme"
+    },
+    "assetPolicy": {
+      "$ref": "#/$defs/assetPolicy"
+    },
+    "visibility": {
+      "$ref": "#/$defs/visibility"
+    },
+    "instances": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/instance" },
+      "default": []
+    },
+    "scripts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/script" },
+      "default": []
+    },
+    "codegen": {
+      "$ref": "#/$defs/codegen"
+    }
+  },
+  "$defs": {
+    "vector3Array": {
+      "type": "array",
+      "prefixItems": [{ "type": "number" }, { "type": "number" }, { "type": "number" }],
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "vectorRef": {
+      "oneOf": [
+        { "type": "string", "minLength": 1, "maxLength": 128 },
+        { "$ref": "#/$defs/vector3Array" },
+        { "$ref": "#/$defs/serializedValue" }
+      ]
+    },
+    "serializedValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["type", "value"],
+          "properties": {
+            "type": { "const": "Vector3" },
+            "value": { "$ref": "#/$defs/vector3Array" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["type", "value"],
+          "properties": {
+            "type": { "const": "Color3" },
+            "value": { "$ref": "#/$defs/vector3Array" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["type", "value"],
+          "properties": {
+            "type": { "const": "CFrame" },
+            "value": {
+              "type": "array",
+              "items": { "type": "number" },
+              "minItems": 3,
+              "maxItems": 12
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["type", "value"],
+          "properties": {
+            "type": { "const": "Enum" },
+            "value": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["type", "value"],
+          "properties": {
+            "type": { "const": "UDim2" },
+            "value": {
+              "type": "array",
+              "prefixItems": [
+                { "type": "number" },
+                { "type": "number" },
+                { "type": "number" },
+                { "type": "number" }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["type", "value"],
+          "properties": {
+            "type": { "const": "BrickColor" },
+            "value": { "type": ["string", "number"] }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["type", "value"],
+          "properties": {
+            "type": { "const": "NumberRange" },
+            "value": {
+              "oneOf": [
+                { "type": "number" },
+                {
+                  "type": "array",
+                  "prefixItems": [{ "type": "number" }, { "type": "number" }],
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["type", "value"],
+          "properties": {
+            "type": { "const": "ColorSequence" },
+            "value": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["time", "color"],
+                "properties": {
+                  "time": { "type": "number", "minimum": 0, "maximum": 1 },
+                  "color": { "$ref": "#/$defs/vector3Array" }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "propertyValue": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "number" },
+        { "type": "boolean" },
+        { "type": "null" },
+        { "$ref": "#/$defs/serializedValue" }
+      ]
+    },
+    "zone": {
+      "type": "object",
+      "required": ["name", "kind", "position", "size"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "kind": {
+          "type": "string",
+          "enum": ["spawn", "combat", "shop", "obstacle", "road", "decoration", "boundary"]
+        },
+        "position": { "$ref": "#/$defs/serializedValue" },
+        "size": { "$ref": "#/$defs/serializedValue" },
+        "notes": { "type": "string" }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["open-world", "linear", "hub", "arena", "city", "dungeon", "obby", "custom"],
+          "default": "custom"
+        },
+        "origin": { "$ref": "#/$defs/vector3Array" },
+        "size": { "$ref": "#/$defs/vector3Array" },
+        "primaryAxis": { "type": "string", "enum": ["x", "y", "z"] },
+        "gridSize": { "type": "number", "exclusiveMinimum": 0, "maximum": 10000 },
+        "grounding": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": { "type": "string", "enum": ["raycast", "manual", "none"], "default": "raycast" },
+            "groundY": { "type": "number" },
+            "clearance": { "type": "number", "minimum": 0, "maximum": 100, "default": 0.05 },
+            "support": { "type": "string", "enum": ["none", "skirt", "piers"], "default": "skirt" }
+          }
+        },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "building": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "residential",
+            "commercial",
+            "industrial",
+            "civic",
+            "landmark",
+            "arena",
+            "utility",
+            "tower",
+            "market",
+            "monastery",
+            "factory",
+            "outpost",
+            "custom"
+          ],
+          "default": "custom"
+        },
+        "position": { "$ref": "#/$defs/vector3Array" },
+        "size": { "$ref": "#/$defs/vector3Array" },
+        "footprint": { "$ref": "#/$defs/vector3Array" },
+        "levels": { "type": "integer", "exclusiveMinimum": 0, "maximum": 16 },
+        "floorCount": { "type": "integer", "exclusiveMinimum": 0, "maximum": 200 },
+        "floorHeight": { "type": "number", "exclusiveMinimum": 0, "maximum": 80 },
+        "balconyEvery": { "type": "integer", "exclusiveMinimum": 0, "maximum": 16 },
+        "roof": { "type": "string", "enum": ["flat", "pitched", "dome", "antenna", "custom"] },
+        "material": { "type": "string", "maxLength": 128 },
+        "style": { "type": "string", "maxLength": 128 },
+        "entrances": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "default": []
+        },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "level": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "order": { "type": "integer", "minimum": 0 },
+        "kind": {
+          "type": "string",
+          "enum": ["surface", "interior", "underground", "sky", "dungeon", "arena", "custom"],
+          "default": "custom"
+        },
+        "bounds": { "$ref": "#/$defs/vector3Array" },
+        "altitude": { "type": "number" },
+        "connectsTo": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "default": []
+        },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "poi": {
+      "type": "object",
+      "required": ["name", "position"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "spawn",
+            "objective",
+            "quest",
+            "shop",
+            "market",
+            "combat",
+            "puzzle",
+            "resource",
+            "landmark",
+            "vista",
+            "transit",
+            "custom"
+          ],
+          "default": "custom"
+        },
+        "position": { "$ref": "#/$defs/vector3Array" },
+        "size": { "$ref": "#/$defs/vector3Array" },
+        "color": { "$ref": "#/$defs/serializedValue" },
+        "transparency": { "type": "number", "minimum": 0, "maximum": 1 },
+        "radius": { "type": "number", "exclusiveMinimum": 0 },
+        "priority": { "type": "string", "enum": ["low", "medium", "high", "critical"], "default": "medium" },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "connector": {
+      "type": "object",
+      "required": ["name", "kind", "from", "to"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "kind": {
+          "type": "string",
+          "enum": ["road", "path", "bridge", "tunnel", "stairs", "elevator", "teleporter", "door", "zipline", "custom"]
+        },
+        "from": { "$ref": "#/$defs/vectorRef" },
+        "to": { "$ref": "#/$defs/vectorRef" },
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "bidirectional": { "type": "boolean", "default": true },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "functionalObject": {
+      "type": "object",
+      "required": ["name", "kind"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "kind": {
+          "type": "string",
+          "enum": ["door", "button", "lever", "elevator", "teleporter", "checkpoint", "custom"]
+        },
+        "action": {
+          "type": "string",
+          "enum": ["toggle", "open", "move", "teleport", "checkpoint", "message", "custom"],
+          "default": "toggle"
+        },
+        "position": { "$ref": "#/$defs/vector3Array" },
+        "size": { "$ref": "#/$defs/vector3Array" },
+        "target": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "targetPosition": { "$ref": "#/$defs/vector3Array" },
+        "openOffset": { "$ref": "#/$defs/vector3Array" },
+        "promptText": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "startsOpen": { "type": "boolean", "default": false },
+        "locked": { "type": "boolean", "default": false },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mood": { "type": "string", "maxLength": 128 },
+        "genre": { "type": "string", "maxLength": 128 },
+        "timePeriod": { "type": "string", "maxLength": 128 },
+        "palette": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "wall": { "$ref": "#/$defs/serializedValue" },
+                "accent": { "$ref": "#/$defs/serializedValue" },
+                "roof": { "$ref": "#/$defs/serializedValue" },
+                "floor": { "$ref": "#/$defs/serializedValue" },
+                "trim": { "$ref": "#/$defs/serializedValue" }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "color"],
+                "additionalProperties": false,
+                "properties": {
+                  "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+                  "color": { "$ref": "#/$defs/serializedValue" }
+                }
+              }
+            }
+          ]
+        },
+        "materials": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "default": []
+        },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "assetPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "allowExternalAssets": { "type": "boolean", "default": false },
+        "allowedAssetIds": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "integer", "exclusiveMinimum": 0 },
+              { "type": "string", "pattern": "^\\d+$" }
+            ]
+          },
+          "default": []
+        },
+        "allowedSources": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["built-in", "creator-store", "team-owned", "local", "custom"] },
+          "default": ["built-in"]
+        },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "visibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "maxViewDistance": { "type": "number", "exclusiveMinimum": 0 },
+        "fogStart": { "type": "number", "minimum": 0 },
+        "fogEnd": { "type": "number", "minimum": 0 },
+        "occlusion": { "type": "string", "enum": ["none", "manual", "streaming", "custom"], "default": "streaming" },
+        "levelOfDetail": { "type": "string", "enum": ["low", "medium", "high", "adaptive"], "default": "adaptive" },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "instance": {
+      "type": "object",
+      "required": ["className", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "className": { "type": "string" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "parentPath": { "type": "string", "default": "$MAP_ROOT" },
+        "properties": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/propertyValue" },
+          "default": {}
+        }
+      }
+    },
+    "script": {
+      "type": "object",
+      "required": ["path", "source"],
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string" },
+        "source": { "type": "string" }
+      }
+    },
+    "codegen": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "target": { "type": "string", "enum": ["studio", "rojo", "both"], "default": "studio" },
+        "rojoRoot": { "type": "string", "minLength": 1, "maxLength": 260, "default": "generated/rojo" },
+        "projectName": { "type": "string", "minLength": 1, "maxLength": 80 }
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Roblox Studio"
+  short_description: "Build and repair Roblox Studio maps"
+  default_prompt: "Use $roblox-studio to inspect the open place and build or repair the requested Roblox map."

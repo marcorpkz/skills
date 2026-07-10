@@ -1,0 +1,21 @@
+{
+  "name": "skills",
+  "metadata": {
+    "description": "Focused tools and workflows for building Roblox Studio maps and Luau."
+  },
+  "owner": {
+    "name": "ShiroKSH"
+  },
+  "plugins": [
+    {
+      "name": "roblox-studio",
+      "description": "Inspect, build, repair, validate, and playtest Roblox Studio maps through a local bridge.",
+      "author": {
+        "name": "ShiroKSH"
+      },
+      "source": "./",
+      "category": "development",
+      "homepage": "https://github.com/ShiroKSH/skills"
+    }
+  ]
+}
