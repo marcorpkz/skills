@@ -146,4 +146,9 @@ npm run validate:skill
 npm run build:plugin
 ```
 
+Pull requests receive automatic reviews from CodeRabbit, Qodo, and Sourcery. GitHub
+CodeQL scans JavaScript and TypeScript changes, while Dependabot opens grouped weekly
+dependency updates and immediate security-fix PRs. Automated suggestions still need
+to be verified against the tests and the Roblox Studio safety boundaries.
+
 More detail: [Contributing](CONTRIBUTING.md), [Protocol](docs/protocol.md), [Safety](docs/safety.md), [Troubleshooting](docs/troubleshooting.md), and [Changelog](CHANGELOG.md).

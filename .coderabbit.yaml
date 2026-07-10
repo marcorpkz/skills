@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+early_access: false
+
+reviews:
+  profile: "assertive"
+  request_changes_workflow: false
+  high_level_summary: true
+  in_progress_fortune: false
+  poem: false
+  review_status: true
+  review_details: false
+  enable_prompt_for_ai_agents: true
+  auto_review:
+    enabled: true
+    drafts: false
+  path_filters:
+    - "!assets/**"
+    - "!dist/**"
+    - "!generated/**"
+    - "!logs/**"
+    - "!node_modules/**"
+    - "!package-lock.json"
+  path_instructions:
+    - path: "packages/mcp-server/src/**"
+      instructions: >-
+        Prioritize MCP contract compatibility, input validation, bounded operations,
+        loopback and token authentication, path traversal, unsafe Luau, and clear
+        error propagation. Flag changes that could report success before Studio or
+        filesystem work has actually completed.
+    - path: "plugin/src/**/*.lua"
+      instructions: >-
+        Review as Roblox Studio plugin Luau. Preserve ChangeHistoryService recording,
+        managed build-root boundaries, loopback-only transport, token checks, and
+        deterministic Instance cleanup. Flag destructive Workspace edits, unbounded
+        polling, leaked connections, and client/server API misuse.
+    - path: "skills/**"
+      instructions: >-
+        Keep agent instructions concrete, tool-aware, and internally consistent.
+        Check SKILL.md frontmatter, installation commands, referenced paths, safety
+        boundaries, and compatibility with both Claude Code and Codex.
+    - path: "**/*.test.ts"
+      instructions: >-
+        Look for behavioral coverage of failure paths, security boundaries, malformed
+        input, retries, cleanup, and protocol compatibility rather than implementation
+        details alone.
+
+chat:
+  auto_reply: true

@@ -35,6 +35,10 @@ For Studio plugin changes:
 npm run build:plugin
 ```
 
+CodeRabbit, Qodo, Sourcery, and CodeQL run automatically on pull requests. Resolve
+actionable findings, but verify generated suggestions before applying them. Review
+bots do not replace the local checks above or a Studio playtest when behavior changes.
+
 ## Safety
 
 - Do not add Roblox credentials, cookies, `.ROBLOSECURITY`, or real tokens.
