@@ -4,10 +4,13 @@ local HttpTransport = require(script.Bridge.HttpTransport)
 
 local toolbar = plugin:CreateToolbar("Roblox Studio Bridge")
 local button = toolbar:CreateButton(
-	"Roblox Studio Bridge",
-	"Open Roblox Studio Bridge",
-	"rbxasset://textures/StudioSharedUI/RobloxLogo.png"
+        "RobloxStudioBridge",
+        "Open Roblox Studio Bridge",
+        "rbxassetid://14978048121",
+        "Roblox Studio Bridge"
 )
+
+button.ClickableWhenViewportHidden = true
 
 local ui = Ui.new(plugin, button)
 local router = CommandRouter.new(plugin, ui)
