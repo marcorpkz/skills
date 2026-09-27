@@ -13,6 +13,7 @@ local button = toolbar:CreateButton(
 button.ClickableWhenViewportHidden = true
 
 local ui = Ui.new(plugin, button)
+ui.widget.Enabled = true
 local router = CommandRouter.new(plugin, ui)
 local transport = HttpTransport.new(plugin, router, ui)
 
