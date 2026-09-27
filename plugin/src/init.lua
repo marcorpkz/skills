@@ -1,3 +1,4 @@
+warn("ROBLOX STUDIO BRIDGE INICIOU")
 local Ui = require(script.Bridge.Ui)
 local CommandRouter = require(script.Bridge.CommandRouter)
 local HttpTransport = require(script.Bridge.HttpTransport)
