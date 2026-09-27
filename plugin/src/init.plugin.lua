@@ -1,7 +1,7 @@
 warn("ROBLOX STUDIO BRIDGE INICIOU")
-local Ui = require(script.Bridge.Ui)
-local CommandRouter = require(script.Bridge.CommandRouter)
-local HttpTransport = require(script.Bridge.HttpTransport)
+local Ui = require(script.Parent.Bridge.Ui)
+local CommandRouter = require(script.Parent.Bridge.CommandRouter)
+local HttpTransport = require(script.Parent.Bridge.HttpTransport)
 
 local toolbar = plugin:CreateToolbar("Roblox Studio Bridge")
 local button = toolbar:CreateButton(
