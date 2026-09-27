@@ -2,10 +2,7 @@
   "name": "RobloxStudioBridge",
   "tree": {
     "$className": "Script",
-    "$properties": {
-      "RunContext": "Plugin"
-    },
-    "$path": "src/init.lua",
+    "$path": "src/init.plugin.lua",
     "Bridge": {
       "$path": "src/Bridge"
     }
